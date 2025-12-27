@@ -1,5 +1,9 @@
 package api;
 
+enum CarStatus {
+    AVAILABLE,
+    RENTED
+}
 public class Car {
     private String id;
     private String licensePlate;
@@ -8,7 +12,7 @@ public class Car {
     private String model;
     private int year;
     private String color;
-    private String status;
+    private CarStatus status;
 
     public Car (String id, String licensePlate, String brand, String model,String label, int year, String color, String status) {
         this.id = id;
@@ -18,7 +22,8 @@ public class Car {
         this.model = model;
         this.year = year;
         this.color = color;
-        this.status = status;
+        this.status = CarStatus.AVAILABLE; //Default status
+
     }
 
     // Getters
@@ -43,7 +48,10 @@ public class Car {
     public String getColor() {
         return color;
     }
-    public String getStatus() {
+    public CarStatus getStatus() {
         return status;
+    }
+    public void setStatus(CarStatus status) {
+        this.status = status;
     }
 }

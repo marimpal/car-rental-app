@@ -13,4 +13,18 @@ public class Customer {
         this.email = email;
         this.phoneNumber = phoneNumber;
     }
+
+    // Getters
+    public String getVatNumber() {
+        return vatNumber;
+    }
+    public String getName() {
+        return name;
+    }
+    public String getEmail() {
+        return email;
+    }
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
 }
