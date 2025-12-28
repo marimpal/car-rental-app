@@ -4,17 +4,17 @@ package api;
 public class Car {
     private String id;
     private String licensePlate;
-    private String label;
+    private String type;
     private String brand;
     private String model;
     private int year;
     private String color;
     private String status;
 
-    public Car (String id, String licensePlate, String brand, String model,String label, int year, String color, String status) {
+    public Car (String id, String licensePlate, String brand, String model,String type, int year, String color, String status) {
         this.id = id;
         this.licensePlate = licensePlate;
-        this.label = label;
+        this.type = type;
         this.brand = brand;
         this.model = model;
         this.year = year;
@@ -30,8 +30,8 @@ public class Car {
     public String getLicensePlate() {
         return licensePlate;
     }
-    public String getLabel() {
-        return label;
+    public String getType() {
+        return type;
     }
     public String getBrand() {
         return brand;
@@ -45,5 +45,9 @@ public class Car {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String toCSV() {
+        return id + "," + licensePlate + "," + brand + "," + type + "," + model + "," + year + "," + color + "," + status;
     }
 }

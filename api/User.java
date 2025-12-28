@@ -30,4 +30,8 @@ public class User {
         return password;
     }
     public String getSurname() {return surname;}
+
+    public String toCSV() {
+        return name + "," + surname + "," + username + "," + email + "," + password;
+    }
 }

@@ -45,5 +45,14 @@ public class Rental {
         return isActive;
     }
 
+    // Setters
+    public void setActive (boolean active) {
+        isActive = active;
+    }
+
+    public String toCSV() {
+        return rentalId + "," + carId + "," + customer + "," + user + "," + rentalDate + "," + returnDate + "," + isActive;
+    }
+
 
 }

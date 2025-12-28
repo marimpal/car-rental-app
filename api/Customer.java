@@ -37,4 +37,10 @@ public class Customer {
         this.phoneNumber = phoneNumber;
     }
 
+    public String toCSV() {
+        return vatNumber + "," + fullName + "," + phoneNumber + "," + email;
+    }
+
+
+
 }
