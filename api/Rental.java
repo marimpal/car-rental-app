@@ -1,40 +1,49 @@
 package api;
 
+import java.time.LocalDate;
+
 public class Rental {
 
-    private String id;
-    private String car;
-    private Customer customer;
-    private User user;
-    private String rentalDate;
-    private String returnDate;
+    private String rentalId;
+    private String carId;
+    private String customer;
+    private String user;
+    private LocalDate rentalDate;
+    private LocalDate returnDate;
+    private boolean isActive;
 
-    public Rental(String id, String car, Customer customer, User user, String rentalDate, String returnDate) {
-        this.id = id;
-        this.car = car;
+
+    public Rental(String rentalId, String carId, String customer, String user, LocalDate rentalDate, LocalDate returnDate, boolean isActive) {
+        this.rentalId = rentalId;
+        this.carId = carId;
         this.customer = customer;
         this.user = user;
         this.rentalDate = rentalDate;
         this.returnDate = returnDate;
+        this.isActive = isActive;
     }
     // Getters
-    public String getId() {
-        return id;
+    public String getRentalId() {
+        return rentalId;
     }
-    public String getCar() {
-        return car;
+    public String getCarId() {
+        return carId;
     }
-    public Customer getCustomer() {
+    public String getCustomer() {
         return customer;
     }
-    public User getUser() {
+    public String getUser() {
         return user;
     }
-    public String getRentalDate() {
+    public LocalDate getRentalDate() {
         return rentalDate;
     }
-    public String getReturnDate() {
+    public LocalDate getReturnDate() {
         return returnDate;
     }
+    public boolean isActive() {
+        return isActive;
+    }
+
 
 }

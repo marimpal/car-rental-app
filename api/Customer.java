@@ -3,13 +3,13 @@ package api;
 public class Customer {
 
     private String vatNumber;
-    private String name;
+    private String fullName;
     private String email;
     private String phoneNumber;
 
-    public Customer(String vatNumber, String name, String email, String phoneNumber) {
+    public Customer(String vatNumber, String fullName, String email, String phoneNumber) {
         this.vatNumber = vatNumber;
-        this.name = name;
+        this.fullName = fullName;
         this.email = email;
         this.phoneNumber = phoneNumber;
     }
@@ -18,8 +18,8 @@ public class Customer {
     public String getVatNumber() {
         return vatNumber;
     }
-    public String getName() {
-        return name;
+    public String getFullName() {
+        return fullName;
     }
     public String getEmail() {
         return email;
@@ -27,4 +27,14 @@ public class Customer {
     public String getPhoneNumber() {
         return phoneNumber;
     }
+
+    // Setters
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+    public void setEmail(String email) {this.email = email;}
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
 }
