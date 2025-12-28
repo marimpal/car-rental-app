@@ -1,13 +1,13 @@
 package api;
 
-public class Employee {
+public class User {
 
     private String name;
     private String email;
     private String username;
     private String password;
 
-    public Employee(String name, String email, String username, String password) {
+    public User(String name, String email, String username, String password, String trim) {
         this.name = name;
         this.email = email;
         this.username = username;

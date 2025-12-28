@@ -3,17 +3,17 @@ package api;
 public class Rental {
 
     private String id;
-    private String carId;
+    private String car;
     private Customer customer;
-    private Employee employee;
+    private User user;
     private String rentalDate;
     private String returnDate;
 
-    public Rental(String id, String carId, Customer customer, Employee employee, String rentalDate, String returnDate) {
+    public Rental(String id, String car, Customer customer, User user, String rentalDate, String returnDate) {
         this.id = id;
-        this.carId = carId;
+        this.car = car;
         this.customer = customer;
-        this.employee = employee;
+        this.user = user;
         this.rentalDate = rentalDate;
         this.returnDate = returnDate;
     }
@@ -21,14 +21,14 @@ public class Rental {
     public String getId() {
         return id;
     }
-    public String getCarId() {
-        return carId;
+    public String getCar() {
+        return car;
     }
     public Customer getCustomer() {
         return customer;
     }
-    public Employee getEmployee() {
-        return employee;
+    public User getUser() {
+        return user;
     }
     public String getRentalDate() {
         return rentalDate;
