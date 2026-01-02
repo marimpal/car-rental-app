@@ -10,7 +10,7 @@ import java.time.LocalDate;
  *
  *
  * * @author Μαριλένα Μπαλαμπανίδου ΑΕΜ 4977
- * @since 2024-12-12
+ * @since 2025-12-17
  */
 public class Rental {
     /** Ο μοναδικός κωδικός της ενοικίασης */
@@ -28,8 +28,9 @@ public class Rental {
     /** Η κατάσταση της ενοικίασης (ενεργή ή όχι) */
     private boolean isActive;
 
-
     /**
+     * Ο κατασκευαστής της κλάσης Rental, που κατασκευάζει ένα νέο αντικείμενο Rental.
+     *
      * @param rentalId τo μοναδικό αναγνωριστικό της ενοικίασης
      * @param carId το αναγνωριστικό του αυτοκινήτου που ενοικιάστηκε
      * @param customer ο πελάτης που έκανε την ενοικίαση
@@ -108,6 +109,4 @@ public class Rental {
     public String toCSV() {
         return rentalId + "," + carId + "," + customer + "," + user + "," + rentalDate + "," + returnDate + "," + isActive;
     }
-
-
 }

@@ -7,7 +7,7 @@ package api;
  * καθώς και να αλλάξει κάποια στοιχεία επικοινωνίας του πελάτη.
  *
  * @author Μαριλένα Μπαλαμπανίδου ΑΕΜ 4977
- * @since 2024-12-12
+ * @since 2025-12-17
  */
 public class Customer {
 
@@ -95,7 +95,4 @@ public class Customer {
     public String toCSV() {
         return vatNumber + "," + fullName + "," + phoneNumber + "," + email;
     }
-
-
-
 }
