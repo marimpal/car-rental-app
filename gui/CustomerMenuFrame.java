@@ -1,6 +1,10 @@
-package api.gui;
+/**
+ * @author Παναγιώτα Πατεράκη  ΑΕΜ 4839
+ * @since 2025-12-17
+ */
+package gui;
 import javax.swing.*;
-import java.awt.*;
+
 import api.DataManager;
 
 public class CustomerMenuFrame extends JFrame {
