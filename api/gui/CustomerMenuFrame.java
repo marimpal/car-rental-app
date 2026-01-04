@@ -1,3 +1,6 @@
+package api.gui;
+import javax.swing.*;
+import java.awt.*;
 import api.DataManager;
 
 public class CustomerMenuFrame extends JFrame {

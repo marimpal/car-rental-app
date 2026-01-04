@@ -8,13 +8,13 @@ import javax.swing.SwingUtilities;
 public class Main {
     public static void main(String[] args) {
 
-        // Δημιουργία και αρχικοποίηση API
-        DataManager dataManager = new DataManager();
-        dataManager.loadAllData();
+
+        DataManager dm = new DataManager();
+        dm.loadAllData();
 
         // Εκκίνηση GUI
         SwingUtilities.invokeLater(() -> {
-            new LoginFrame(dataManager);
+            new LoginFrame(dm);
         });
     }
 }

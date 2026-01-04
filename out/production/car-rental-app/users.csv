@@ -1,4 +1,4 @@
-name, surname, username, email, password
+name,surname,username,email,password
 John,Smith,jsmith,john.smith@test.com,password1
 Mary,Jones,mjones,mary.jones@test.com,password2
 Tom,Brown,tbrown,tom.brown@test.com,password3
