@@ -60,7 +60,6 @@ public class UserManagementFrame extends JFrame {
             );
         });
 
-        /* ===== Delete User ===== */
         deleteUserBtn.addActionListener(e -> {
             String username = JOptionPane.showInputDialog(
                     this,
