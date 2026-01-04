@@ -219,6 +219,15 @@ public class DataManager {
         return loggedInUser;
     }
 
+    /**
+     * Επιστρέφει τη λίστα όλων των χρηστών.
+     *
+     * @return Η λίστα όλων των χρηστών (List<User>).
+     */
+    public List<User> getAllUsers() {
+        return users;
+    }
+
     // Διαχείριση Αυτοκινήτων
 
     /**
@@ -257,6 +266,15 @@ public class DataManager {
         return results;
     }
 
+    /**
+     * Επιστρέφει τη λίστα όλων των αυτοκινήτων.
+     *
+     * @return Η λίστα όλων των αυτοκινήτων (List<Car>).
+     */
+    public List<Car> getAllCars() {
+        return cars;
+    }
+
     //Διαχείριση Πελατών
 
     /**
@@ -291,6 +309,15 @@ public class DataManager {
             }
         }
         return results;
+    }
+
+    /**
+     * Επιστρέφει τη λίστα όλων των πελατών.
+     *
+     * @return Η λίστα όλων των πελατών (List<Customer>).
+     */
+    public List<Customer> getAllCustomers() {
+        return customers;
     }
 
     // Διαχείριση Ενοικιάσεων
@@ -339,5 +366,14 @@ public class DataManager {
             v.setStatus("Διαθέσιμο");
         }
         saveData();
+    }
+
+    /**
+     * Επιστρέφει τη λίστα όλων των ενοικιάσεων.
+     *
+     * @return Η λίστα όλων των ενοικιάσεων (List<Rental>).
+     */
+    public List<Rental> getAllRentals() {
+        return rentals;
     }
 }
