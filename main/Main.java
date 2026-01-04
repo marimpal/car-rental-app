@@ -1,7 +1,11 @@
+/**
+ * @author Παναγιώτα Πατεράκη  ΑΕΜ 4839
+ * @since 2025-12-17
+ */
 package main;
 
 import api.DataManager;
-import api.gui.LoginFrame;
+import gui.LoginFrame;
 
 import javax.swing.SwingUtilities;
 
@@ -12,7 +16,6 @@ public class Main {
         DataManager dm = new DataManager();
         dm.loadAllData();
 
-        // Εκκίνηση GUI
         SwingUtilities.invokeLater(() -> {
             new LoginFrame(dm);
         });

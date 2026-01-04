@@ -1,4 +1,8 @@
-package api.gui;
+/**
+ * @author Παναγιώτα Πατεράκη  ΑΕΜ 4839
+ * @since 2025-12-17
+ */
+package gui;
 
 import api.DataManager;
 
