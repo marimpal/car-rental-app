@@ -1,10 +1,12 @@
-package api.gui;
-
-import javax.swing.*;
+import api.DataManager;
 
 public class UserManagementFrame extends JFrame {
 
-    public UserManagementFrame() {
+    private DataManager dataManager;
+
+    public UserManagementFrame(DataManager dataManager) {
+        this.dataManager = dataManager;
+
         setTitle("User Management");
         setSize(400, 300);
         setLocationRelativeTo(null);

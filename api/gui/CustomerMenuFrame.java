@@ -1,10 +1,12 @@
-package api.gui;
-
-import javax.swing.*;
+import api.DataManager;
 
 public class CustomerMenuFrame extends JFrame {
 
-    public CustomerMenuFrame() {
+    private DataManager dataManager;
+
+    public CustomerMenuFrame(DataManager dataManager) {
+        this.dataManager = dataManager;
+
         setTitle("Customer Menu");
         setSize(400, 300);
         setLocationRelativeTo(null);
