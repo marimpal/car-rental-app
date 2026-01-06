@@ -35,14 +35,35 @@ public class EditCustomerFrame extends JFrame {
         JButton saveBtn = new JButton("Save");
 
         saveBtn.addActionListener(e -> {
-            customer.setFullName(nameField.getText());
-            customer.setPhoneNumber(phoneField.getText());
-            customer.setEmail(emailField.getText());
+            try {
+                // Ενημέρωση στοιχείων πελάτη από τα πεδία
+                customer.setFullName(nameField.getText());
+                customer.setPhoneNumber(phoneField.getText());
+                customer.setEmail(emailField.getText());
 
-            dm.updateCustomer(customer);
-            JOptionPane.showMessageDialog(this, "Customer updated");
-            dispose();
+                // Αποθήκευση αλλαγών μέσω DataManager
+                dm.updateCustomer(customer);
+
+                // Μήνυμα επιτυχίας
+                JOptionPane.showMessageDialog(
+                        this,
+                        "Customer updated successfully"
+                );
+
+                // Κλείσιμο παραθύρου
+                dispose();
+
+            } catch (Exception ex) {
+                // Μήνυμα σφάλματος
+                JOptionPane.showMessageDialog(
+                        this,
+                        ex.getMessage(),
+                        "Error",
+                        JOptionPane.ERROR_MESSAGE
+                );
+            }
         });
+
 
         setLayout(new GridLayout(0, 2, 8, 8));
         add(new JLabel("VAT:"));
