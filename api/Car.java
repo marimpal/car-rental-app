@@ -171,4 +171,12 @@ public class Car {
     public String toCSV() {
         return id + "," + licensePlate + "," + brand + "," + type + "," + model + "," + year + "," + color + "," + status;
     }
+
+    public String toString() {
+        return "Πινακίδα: " + licensePlate +
+                " | Μάρκα: " + brand +
+                " | Μοντέλο: " + model +
+                " | Έτος: " + year +
+                " | Κατάσταση: " + status;
+    }
 }

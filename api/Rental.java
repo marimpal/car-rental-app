@@ -110,4 +110,11 @@ public class Rental {
     public String toCSV() {
         return rentalId + "," + carId + "," + customer + "," + user + "," + rentalDate + "," + returnDate + "," + isActive;
     }
+
+    public String toString() {
+        return "Αυτοκίνητο: " + carId +
+                " | Πελάτης: " + customer +
+                " | Από: " + rentalId +
+                " | Έως: " + returnDate;
+    }
 }
