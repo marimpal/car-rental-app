@@ -1,5 +1,8 @@
 /**
- * @author Παναγιώτα Πατεράκη  ΑΕΜ 4839
+ * Κεντρικό μενού της εφαρμογής
+ * Από εδώ ο χρήστης έχει πρόσβαση σε όλες τις βασικές λειτουργίες
+ *
+ * @author Παναγιώτα Πατεράκη
  * @since 2025-12-17
  */
 package gui;
@@ -10,102 +13,77 @@ import java.awt.*;
 
 public class MainMenuFrame extends JFrame {
 
-    // Αναφορά στο DataManager για προσβαση σε ολες τις λειτουργιες
+    // Αντικείμενο DataManager για επικοινωνία με τα δεδομένα της εφαρμογής
     private final DataManager dm;
 
+    /**
+     * Constructor του Main Menu
+     * Δημιουργεί το βασικό παράθυρο με όλα τα κουμπιά
+     */
     public MainMenuFrame(DataManager dm) {
         this.dm = dm;
 
-        // Βασικες ρυθμισεις του κεντρικου μενου
+        // Τίτλος παραθύρου
         setTitle("Main Menu");
-        setSize(400,400);
+
+        // Διαστάσεις παραθύρου
+        setSize(400, 450);
+
+        // Κεντράρισμα στην οθόνη
         setLocationRelativeTo(null);
+
+        // Κλείσιμο εφαρμογής όταν κλείσει το παράθυρο
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        // Panel με καθετη διαταξη για τα κουμπια
-        JPanel panel = new JPanel(new GridLayout(0,1,12,12));
+        // Panel με κάθετη διάταξη κουμπιών
+        JPanel panel = new JPanel(new GridLayout(0, 1, 10, 10));
 
-        // Κουμπια για τις βασικες λειτουργιες της εφαρμογης
+        // Δημιουργία κουμπιών για τις βασικές λειτουργίες
         JButton addCarBtn = new JButton("Add Car");
-        JButton editCarBtn = new JButton("Edit Car");
         JButton viewCarsBtn = new JButton("View Cars");
         JButton searchCarBtn = new JButton("Search Car");
-        JButton rentCarBtn = new JButton("Rent Car");
-        JButton returnCarBtn = new JButton("Return Car");
-        JButton carRentHistoryBtn = new JButton("Car Rent History");
+
         JButton addCustomerBtn = new JButton("Add Customer");
-        JButton editCustomerBtn = new JButton("Edit Customer");
         JButton searchCustomerBtn = new JButton("Search Customer");
-        JButton customerRentHistoryBtn = new JButton("Customer Rent History");
-        JButton userManagementBtn = new JButton("User Management");
+
         JButton logoutBtn = new JButton("Logout");
 
-        // Προσθηκη κουμπιων στο panel
+        // Προσθήκη των κουμπιών στο panel
         panel.add(addCarBtn);
-        panel.add(editCarBtn);
         panel.add(viewCarsBtn);
         panel.add(searchCarBtn);
-        panel.add(rentCarBtn);
-        panel.add(returnCarBtn);
-        panel.add(carRentHistoryBtn);
         panel.add(addCustomerBtn);
-        panel.add(editCustomerBtn);
         panel.add(searchCustomerBtn);
-        panel.add(customerRentHistoryBtn);
-        panel.add(userManagementBtn);
         panel.add(logoutBtn);
 
-        // Προσθηκη panel στο frame
+        // Προσθήκη panel στο παράθυρο
         add(panel);
 
-        // Ανοιγμα παραθυρου προσθηκης αυτοκινητου
+        // Άνοιγμα της νφόρμας προσθήκης αυτοκινήτου
         addCarBtn.addActionListener(e -> new AddCarFrame(dm));
 
-        //Επεξεργασία Αυτοκινήτου
-        editCarBtn.addActionListener(e -> new EditCarFrame(dm));
-
-        // Προβολη ολων των αυτοκινητων
+        // Προβολή όλων των αυτοκινήτων
+        // Από αυτό το παράθυρο γίνεται και η επεξεργασία (Edit)
         viewCarsBtn.addActionListener(e -> new ViewCarsFrame(dm));
 
-        // αναζήτηση αυτοκινήτου με οποιοδήποτε χαρακτηριστικού
+        // Αναζήτηση αυτοκινήτου
         searchCarBtn.addActionListener(e -> new SearchCarFrame(dm));
 
-        // Διαδικασια ενοικιασης αυτοκινητου
-        rentCarBtn.addActionListener(e -> new RentCarFrame(dm));
-
-        // Διαδικασια επιστροφης αυτοκινητου
-        returnCarBtn.addActionListener(e -> new ReturnCarFrame(dm));
-
-        //Ιστορικό ενοικιασεων αυτοκινητου
-        carRentHistoryBtn.addActionListener(
-                e -> new CarRentHistoryFrame(dm)
-        );
-
-        // Ανοιγμα φορμας προσθηκης πελατη
+        // Προσθήκη νέου πελάτη
         addCustomerBtn.addActionListener(e -> new AddCustomerFrame(dm));
 
-        //Επεξεργασια στοιχειων πελατων
-        editCustomerBtn.addActionListener(e -> new EditCustomerFrame(dm));
-
-        // Αναζητηση πελατη
+        // Αναζήτηση πελάτη
         searchCustomerBtn.addActionListener(e -> new SearchCustomerFrame(dm));
 
-        //Ιστορικο ενοικιασεων πελατων
-        customerRentHistoryBtn.addActionListener(
-                e -> new CustomerRentHistoryFrame(dm)
-        );
-
-        // Διαχειριση χρηστων του συστηματος
-        userManagementBtn.addActionListener(e -> new UserManagementFrame(dm));
-
-        // Απoσυνδεση χρηστη και επιστροφη στο login
+        // Αποσύνδεση του χρήστη και επιστροφή στο Login
         logoutBtn.addActionListener(e -> {
             dm.logout();
             dispose();
             new LoginFrame(dm);
         });
 
-        // Εμφανιση του κεντρικου μενου
+        // Εμφάνιση παραθύρου
         setVisible(true);
     }
 }
+

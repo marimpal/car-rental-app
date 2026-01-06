@@ -1,7 +1,12 @@
+/**
+ * @author Παναγιώτα Πατεράκη
+ *   @since 2025-12-17
+ * Παράθυρο αναζήτησης αυτοκινήτου
+ */
 package gui;
 
-import api.Car;
 import api.DataManager;
+import api.Car;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,45 +14,41 @@ import java.util.List;
 
 public class SearchCarFrame extends JFrame {
 
-    public SearchCarFrame(DataManager dm) {
+    // Αναφορά στο DataManager
+    private final DataManager dm;
 
+    public SearchCarFrame(DataManager dm) {
+        this.dm = dm;
+
+        // Ρυθμίσεις παραθύρου
         setTitle("Search Car");
-        setSize(500,400);
+        setSize(400, 300);
         setLocationRelativeTo(null);
 
-        JTextField searchField = new JTextField();
+        // Panel επάνω για το πεδίο αναζήτησης
+        JPanel topPanel = new JPanel();
+
+        JTextField searchField = new JTextField(15);
         JButton searchBtn = new JButton("Search");
-        JButton editBtn = new JButton("Edit Selected");
 
-        DefaultListModel<Car> model = new DefaultListModel<>();
-        JList<Car> list = new JList<>(model);
+        // Λίστα αποτελεσμάτων
+        JList<Car> resultList = new JList<>();
+        JScrollPane scrollPane = new JScrollPane(resultList);
 
+        // Προσθήκη στοιχείων στο πάνω panel
+        topPanel.add(new JLabel("Search:"));
+        topPanel.add(searchField);
+        topPanel.add(searchBtn);
+
+        // Ενέργεια αναζήτησης
         searchBtn.addActionListener(e -> {
-            model.clear();
-            List<Car> results = dm.searchCar(searchField.getText());
-            for (Car c : results) {
-                model.addElement(c);
-            }
+            String keyword = searchField.getText();
+            List<Car> results = dm.searchCars(keyword);
+            resultList.setListData(results.toArray(new Car[0]));
         });
 
-        editBtn.addActionListener(e -> {
-            Car selected = list.getSelectedValue();
-            if (selected != null) {
-                new EditCarFrame(dm, selected);
-            }
-        });
-
-        JPanel top = new JPanel(new BorderLayout());
-        top.add(searchField, BorderLayout.CENTER);
-        top.add(searchBtn, BorderLayout.EAST);
-
-        JPanel bottom = new JPanel();
-        bottom.add(editBtn);
-
-        setLayout(new BorderLayout());
-        add(top, BorderLayout.NORTH);
-        add(new JScrollPane(list), BorderLayout.CENTER);
-        add(bottom, BorderLayout.SOUTH);
+        add(topPanel, BorderLayout.NORTH);
+        add(scrollPane, BorderLayout.CENTER);
 
         setVisible(true);
     }
