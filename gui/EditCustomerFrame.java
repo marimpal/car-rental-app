@@ -48,7 +48,11 @@ public class EditCustomerFrame extends JFrame {
             customer.setFullName(nameField.getText());
             customer.setPhoneNumber(phoneField.getText());
 
-            dm.updateCustomer(customer);
+            try {
+                dm.updateCustomer(customer);
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
 
             JOptionPane.showMessageDialog(this,
                     "Customer updated successfully");

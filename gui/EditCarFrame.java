@@ -58,7 +58,11 @@ public class EditCarFrame extends JFrame {
             car.setModel(modelField.getText());
 
             // Αποθήκευση αλλαγών μέσω DataManager
-            dm.updateCar(car);
+            try {
+                dm.updateCar(car);
+            } catch (Exception ex) {
+                throw new RuntimeException(ex);
+            }
 
             // Μήνυμα επιτυχίας
             JOptionPane.showMessageDialog(this,
