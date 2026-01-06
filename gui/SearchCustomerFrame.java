@@ -42,7 +42,7 @@ public class SearchCustomerFrame extends JFrame {
         // Ενέργεια κουμπιού Search
         searchBtn.addActionListener(e -> {
             String keyword = searchField.getText();
-            List<Customer> results = dm.searchCustomers(keyword);
+            List<Customer> results = dm.searchCustomer(keyword);
             resultList.setListData(results.toArray(new Customer[0]));
         });
 

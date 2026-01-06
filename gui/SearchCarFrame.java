@@ -43,7 +43,7 @@ public class SearchCarFrame extends JFrame {
         // Ενέργεια αναζήτησης
         searchBtn.addActionListener(e -> {
             String keyword = searchField.getText();
-            List<Car> results = dm.searchCars(keyword);
+            List<Car> results = dm.searchCar(keyword);
             resultList.setListData(results.toArray(new Car[0]));
         });
 
