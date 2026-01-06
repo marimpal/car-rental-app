@@ -46,8 +46,8 @@ public class Car {
     public Car (String id, String licensePlate, String brand, String model,String type, int year, String color, String status) {
         this.id = id;
         this.licensePlate = licensePlate;
-        this.type = type;
         this.brand = brand;
+        this.type = type;
         this.model = model;
         this.year = year;
         this.color = color;

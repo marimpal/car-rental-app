@@ -6,124 +6,58 @@ import api.DataManager;
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * Επεξεργασία στοιχείων αυτοκινήτου
- *
- * @author Παναγιώτα Πατεράκη
- * @since 2025-12-18
- */
 public class EditCarFrame extends JFrame {
 
     private final DataManager dm;
-    private Car currentCar;
+    private final Car car;
 
-    public EditCarFrame(DataManager dm) {
+    public EditCarFrame(DataManager dm, Car car) {
         this.dm = dm;
+        this.car = car;
 
         setTitle("Edit Car");
-        setSize(450, 400);
+        setSize(400,400);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-        JPanel panel = new JPanel(new GridLayout(0, 2, 8, 8));
+        JTextField brandField = new JTextField(car.getBrand());
+        JTextField modelField = new JTextField(car.getModel());
+        JTextField typeField = new JTextField(car.getType());
+        JTextField yearField = new JTextField(String.valueOf(car.getYear()));
+        JTextField colorField = new JTextField(car.getColor());
+        JTextField statusField = new JTextField(car.getStatus());
 
-        // ===== Αναζήτηση =====
-        JTextField searchField = new JTextField();
-        JButton searchBtn = new JButton("Search");
+        JButton saveBtn = new JButton("Save");
 
-        panel.add(new JLabel("Car ID or Plate:"));
-        panel.add(searchField);
-        panel.add(new JLabel());
-        panel.add(searchBtn);
-
-        // ===== Πεδία επεξεργασίας =====
-        JTextField brandField = new JTextField();
-        JTextField modelField = new JTextField();
-        JTextField colorField = new JTextField();
-        JTextField statusField = new JTextField();
-
-        brandField.setEnabled(false);
-        modelField.setEnabled(false);
-        colorField.setEnabled(false);
-        statusField.setEnabled(false);
-
-        panel.add(new JLabel("Brand:"));
-        panel.add(brandField);
-        panel.add(new JLabel("Model:"));
-        panel.add(modelField);
-        panel.add(new JLabel("Color:"));
-        panel.add(colorField);
-        panel.add(new JLabel("Status:"));
-        panel.add(statusField);
-
-        JButton saveBtn = new JButton("Save Changes");
-        saveBtn.setEnabled(false);
-
-        panel.add(new JLabel());
-        panel.add(saveBtn);
-
-        add(panel);
-
-        // ===== Αναζήτηση αυτοκινήτου =====
-        searchBtn.addActionListener(e -> {
-            String criteria = searchField.getText().trim();
-
-            if (criteria.isEmpty()) {
-                JOptionPane.showMessageDialog(this,
-                        "Please enter car ID or plate",
-                        "Error",
-                        JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
-            currentCar = dm.getAllCars().stream()
-                    .filter(c -> c.getId().equals(criteria)
-                            || c.getLicensePlate().equals(criteria))
-                    .findFirst()
-                    .orElse(null);
-
-            if (currentCar == null) {
-                JOptionPane.showMessageDialog(this,
-                        "Car not found",
-                        "Error",
-                        JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
-            brandField.setText(currentCar.getBrand());
-            modelField.setText(currentCar.getModel());
-            colorField.setText(currentCar.getColor());
-            statusField.setText(currentCar.getStatus());
-
-            brandField.setEnabled(true);
-            modelField.setEnabled(true);
-            colorField.setEnabled(true);
-            statusField.setEnabled(true);
-            saveBtn.setEnabled(true);
-        });
-
-        // ===== Αποθήκευση αλλαγών =====
         saveBtn.addActionListener(e -> {
             try {
-                currentCar.getBrand()(brandField.getText().trim());
-                currentCar.getModel(modelField.getText().trim());
-                currentCar.getColor(colorField.getText().trim());
-                currentCar.setStatus(statusField.getText().trim());
+                Car updated = new Car(
+                        car.getId(),
+                        car.getLicensePlate(),
+                        brandField.getText(),
+                        modelField.getText(),
+                        typeField.getText(),
+                        Integer.parseInt(yearField.getText()),
+                        colorField.getText(),
+                        statusField.getText()
+                );
 
-                dm.saveData();
-
-                JOptionPane.showMessageDialog(this,
-                        "Car updated successfully");
-
+                dm.updateCar(updated);
+                JOptionPane.showMessageDialog(this, "Car updated successfully");
                 dispose();
 
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this,
-                        ex.getMessage(),
-                        "Error",
-                        JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, ex.getMessage());
             }
         });
+
+        setLayout(new GridLayout(0,2,10,10));
+        add(new JLabel("Brand")); add(brandField);
+        add(new JLabel("Model")); add(modelField);
+        add(new JLabel("Type")); add(typeField);
+        add(new JLabel("Year")); add(yearField);
+        add(new JLabel("Color")); add(colorField);
+        add(new JLabel("Status")); add(statusField);
+        add(new JLabel()); add(saveBtn);
 
         setVisible(true);
     }

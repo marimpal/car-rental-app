@@ -1,42 +1,53 @@
 package gui;
-import api.DataManager;
+
 import api.Car;
+import api.DataManager;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
+
 public class SearchCarFrame extends JFrame {
 
-    private final DataManager dm;
-
     public SearchCarFrame(DataManager dm) {
-        this.dm = dm;
 
         setTitle("Search Car");
-        setSize(600, 400);
+        setSize(500,400);
         setLocationRelativeTo(null);
-        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-        JTextField searchField = new JTextField(20);
+        JTextField searchField = new JTextField();
         JButton searchBtn = new JButton("Search");
-        JTextArea resultArea = new JTextArea();
-        resultArea.setEditable(false);
+        JButton editBtn = new JButton("Edit Selected");
+
+        DefaultListModel<Car> model = new DefaultListModel<>();
+        JList<Car> list = new JList<>(model);
 
         searchBtn.addActionListener(e -> {
-            var results = dm.searchCar(searchField.getText());
-            resultArea.setText("");
-            for (var c : results) {
-                resultArea.append(c.toString() + "\n");
+            model.clear();
+            List<Car> results = dm.searchCar(searchField.getText());
+            for (Car c : results) {
+                model.addElement(c);
             }
         });
 
-        JPanel top = new JPanel();
-        top.add(new JLabel("Search:"));
-        top.add(searchField);
-        top.add(searchBtn);
+        editBtn.addActionListener(e -> {
+            Car selected = list.getSelectedValue();
+            if (selected != null) {
+                new EditCarFrame(dm, selected);
+            }
+        });
 
+        JPanel top = new JPanel(new BorderLayout());
+        top.add(searchField, BorderLayout.CENTER);
+        top.add(searchBtn, BorderLayout.EAST);
+
+        JPanel bottom = new JPanel();
+        bottom.add(editBtn);
+
+        setLayout(new BorderLayout());
         add(top, BorderLayout.NORTH);
-        add(new JScrollPane(resultArea), BorderLayout.CENTER);
+        add(new JScrollPane(list), BorderLayout.CENTER);
+        add(bottom, BorderLayout.SOUTH);
 
         setVisible(true);
     }
