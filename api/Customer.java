@@ -95,4 +95,9 @@ public class Customer {
     public String toCSV() {
         return vatNumber + "," + fullName + "," + phoneNumber + "," + email;
     }
+
+
+    public String toString() {
+        return "Full Name: " + fullName + " | VAT: " + vatNumber + " | Phone: " + phoneNumber;
+    }
 }
