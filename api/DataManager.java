@@ -10,7 +10,7 @@ import java.util.UUID;
  * Η κλάση DataManager διαχειρίζεται τα δεδομένα της εφαρμογής ενοικίασης αυτοκινήτων.
  * Περιλαμβάνει μεθόδους για τη φόρτωση και αποθήκευση δεδομένων από/σε αρχεία,
  * καθώς και λειτουργίες για τη διαχείριση χρηστών, οχημάτων, πελατών και ενοικιάσεων.
- * Eπιπλέον, παρέχει λειτουργίες για την είσοδο και έξοδο χρηστών, την προσθήκη νέων οχημάτων και πελατών,
+ * Επιπλέον, παρέχει λειτουργίες για την είσοδο και έξοδο χρηστών, την προσθήκη νέων οχημάτων και πελατών,
  * την αναζήτηση οχημάτων και πελατών, καθώς και την ενοικίαση και επιστροφή οχημάτων.
  *
  * @author Μαριλένα Μπαλαμπανίδου ΑΕΜ 4977
@@ -184,7 +184,7 @@ public class DataManager {
         } catch (IOException e) { e.printStackTrace(); }
     }
 
-    // Είσοδοσ και έξοδος χρήστη
+    // Είσοδος και έξοδος χρήστη
 
     /**
      * Ελέγχει τα στοιχεία του χρήστη και πραγματοποιεί είσοδο αν είναι σωστά.
@@ -267,6 +267,24 @@ public class DataManager {
     }
 
     /**
+     * Επιστρέφει το ιστορικό ενοικιάσεων για ένα συγκεκριμένο αυτοκίνητο με βάση το ID του.
+     *
+     * @param carId Το ID του αυτοκινήτου.
+     * @return Μια λίστα με τις ενοικιάσεις που έχουν γίνει για το συγκεκριμένο αυτοκίνητο.
+     */
+    public List<Rental> getRentalsHistoryByCar(String carId) {
+        List<Rental> carHistory = new ArrayList<>();
+        for (Rental r : rentals) {
+            if (r.getCarId().equals(carId)) {
+                carHistory.add(r);
+            }
+        }
+        // Ταξινόμηση με βάση την ημερομηνία έναρξης (από τα πιο παλιά στα νεότερα)
+        carHistory.sort((r1, r2) -> r1.getRentalDate().compareTo(r2.getRentalDate()));
+        return carHistory;
+    }
+
+    /**
      * Επιστρέφει τη λίστα όλων των αυτοκινήτων.
      *
      * @return Η λίστα όλων των αυτοκινήτων (List<Car>).
@@ -327,18 +345,18 @@ public class DataManager {
      * και ενημερώνει την κατάσταση του αυτοκινήτου σε "Ενοικιασμένο".
      *
      * @param carId Το μοναδικό Id του αυτοκινήτου προς ενοικίαση.
-     * @param customer Το όνομα του πελάτη που ενοικιάζει το αυτοκίνητο.
+     * @param customerVat Το όνομα του πελάτη που ενοικιάζει το αυτοκίνητο.
      * @param start Η ημερομηνία έναρξης της ενοικίασης.
      * @param end Η ημερομηνία λήξης της ενοικίασης.
-     * @throws Exception Αν το αυτοκίνητο δεν βρεθεί ή δεν είναι διαθέσιμο.
+     * @throws Exception Αν το αυτοκίνητο δε βρεθεί ή δεν είναι διαθέσιμο.
      */
-    public void rentCar(String carId, String customer, LocalDate start, LocalDate end) throws Exception {
+    public void rentCar(String carId, String customerVat, LocalDate start, LocalDate end) throws Exception {
         Car c = cars.stream().filter(veh -> veh.getId().equals(carId)).findFirst().orElse(null);
         if (c == null) throw new Exception("Το όχημα δεν βρέθηκε.");
         if (!c.getStatus().equals("Διαθέσιμο")) throw new Exception("Το όχημα δεν είναι διαθέσιμο.");
 
         String rentalId = UUID.randomUUID().toString(); // Μοναδικό ID για την ενοικίαση
-        Rental rental = new Rental(rentalId, carId, customer, loggedInUser.getUsername(), start, end, true);
+        Rental rental = new Rental(rentalId, carId, customerVat, loggedInUser.getUsername(), start, end, true);
 
         rentals.add(rental);
 
@@ -351,7 +369,7 @@ public class DataManager {
      * Επιστρέφει ένα ενοικιασμένο αυτοκίνητο και ενημερώνει την κατάσταση της ενοικίασης και του αυτοκινήτου.
      *
      * @param rentalId Το μοναδικό Id της ενοικίασης που πρόκειται να επιστραφεί.
-     * @throws Exception Αν η ενοικίαση δεν βρεθεί ή έχει ήδη ολοκληρωθεί.
+     * @throws Exception Αν η ενοικίαση δε βρεθεί ή έχει ήδη ολοκληρωθεί.
      */
     public void returnCar(String rentalId) throws Exception {
         Rental rental = rentals.stream().filter(r -> r.getRentalId().equals(rentalId)).findFirst().orElse(null);
@@ -366,6 +384,22 @@ public class DataManager {
             v.setStatus("Διαθέσιμο");
         }
         saveData();
+    }
+
+    /**
+     * Επιστρέφει όλες τις ενοικιάσεις ενός συγκεκριμένου πελάτη με βάση το ΑΦΜ.
+     *
+     * @param vatNumber Το ΑΦΜ του πελάτη.
+     * @return Μια λίστα με τις ενοικιάσεις του πελάτη.
+     */
+    public List<Rental> getRentalsByCustomerVat(String vatNumber) {
+        List<Rental> customerRentals = new ArrayList<>();
+        for (Rental r : rentals) {
+            if (r.getCustomer().equals(vatNumber)) {
+                customerRentals.add(r);
+            }
+        }
+        return customerRentals;
     }
 
     /**
