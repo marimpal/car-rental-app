@@ -248,6 +248,24 @@ public class DataManager {
     }
 
     /**
+     * Ενημερώνει τα στοιχεία ενός υπάρχοντος αυτοκινήτου με βάση το ID.
+     *
+     * @param updatedCar Το αυτοκίνητο με τα ενημερωμένα στοιχεία.
+     * @throws Exception Αν το αυτοκίνητο δε βρεθεί για ενημέρωση.
+     */
+    public void updateCar(Car updatedCar) throws Exception {
+        for (int i = 0; i < cars.size(); i++) {
+            Car car = cars.get(i);
+            if (car.getId().equals(updatedCar.getId())) {
+                cars.set(i, updatedCar);
+                saveData();
+                return;
+            }
+        }
+        throw new Exception("Το αυτοκίνητο δεν βρέθηκε για ενημέρωση");
+    }
+
+    /**
      * Αναζητά αυτοκίνητα που ταιριάζουν με τα κριτήρια αναζήτησης.
      * Αναζητά σε ID, πινακίδα, μάρκα, μοντέλο, χρώμα και κατάσταση.
      *
@@ -264,6 +282,16 @@ public class DataManager {
             }
         }
         return results;
+    }
+
+
+    /**
+     * Επιστρέφει τη λίστα όλων των αυτοκινήτων.
+     *
+     * @return Η λίστα όλων των αυτοκινήτων (List<Car>).
+     */
+    public List<Car> getAllCars() {
+        return cars;
     }
 
     /**
@@ -284,15 +312,6 @@ public class DataManager {
         return carHistory;
     }
 
-    /**
-     * Επιστρέφει τη λίστα όλων των αυτοκινήτων.
-     *
-     * @return Η λίστα όλων των αυτοκινήτων (List<Car>).
-     */
-    public List<Car> getAllCars() {
-        return cars;
-    }
-
     //Διαχείριση Πελατών
 
     /**
@@ -309,6 +328,24 @@ public class DataManager {
         }
         customers.add(customer);
         saveData();
+    }
+
+    /**
+     * Ενημερώνει τα στοιχεία ενός υπάρχοντος πελάτη με βάση το ΑΦΜ.
+     *
+     * @param updatedCustomer Ο πελάτης με τα ενημερωμένα στοιχεία.
+     * @throws Exception Αν ο πελάτης δε βρεθεί για ενημέρωση.
+     */
+    public void updateCustomer(Customer updatedCustomer) throws Exception {
+        for (int i = 0; i < customers.size(); i++) {
+            Customer c = customers.get(i);
+            if (c.getVatNumber().equals(updatedCustomer.getVatNumber())) {
+                customers.set(i, updatedCustomer);
+                saveData();
+                return;
+            }
+        }
+        throw new Exception("Ο πελάτης δεν βρέθηκε για ενημέρωση");
     }
 
     /**
@@ -386,6 +423,16 @@ public class DataManager {
         saveData();
     }
 
+
+    /**
+     * Επιστρέφει τη λίστα όλων των ενοικιάσεων.
+     *
+     * @return Η λίστα όλων των ενοικιάσεων (List<Rental>).
+     */
+    public List<Rental> getAllRentals() {
+        return rentals;
+    }
+
     /**
      * Επιστρέφει όλες τις ενοικιάσεις ενός συγκεκριμένου πελάτη με βάση το ΑΦΜ.
      *
@@ -402,12 +449,4 @@ public class DataManager {
         return customerRentals;
     }
 
-    /**
-     * Επιστρέφει τη λίστα όλων των ενοικιάσεων.
-     *
-     * @return Η λίστα όλων των ενοικιάσεων (List<Rental>).
-     */
-    public List<Rental> getAllRentals() {
-        return rentals;
-    }
 }
