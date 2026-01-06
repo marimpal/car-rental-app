@@ -37,6 +37,7 @@ public class MainMenuFrame extends JFrame {
         JButton carRentHistoryBtn = new JButton("Car Rent History");
 
         // Κουμπιά λειτουργιών πελατών
+        JButton viewCustomersBtn = new JButton("View Customers");
         JButton addCustomerBtn = new JButton("Add Customer");
         JButton searchCustomerBtn = new JButton("Search Customer");
         JButton customerRentHistoryBtn = new JButton("Customer Rent History");
@@ -54,7 +55,7 @@ public class MainMenuFrame extends JFrame {
         panel.add(viewCarsBtn);
         panel.add(searchCarBtn);
         panel.add(carRentHistoryBtn);
-
+        panel.add(viewCustomersBtn);
         panel.add(addCustomerBtn);
         panel.add(searchCustomerBtn);
         panel.add(customerRentHistoryBtn);
@@ -72,7 +73,7 @@ public class MainMenuFrame extends JFrame {
         viewCarsBtn.addActionListener(e -> new ViewCarsFrame(dm));
         searchCarBtn.addActionListener(e -> new SearchCarFrame(dm));
         carRentHistoryBtn.addActionListener(e -> new CarRentHistoryFrame(dm));
-
+        viewCustomersBtn.addActionListener(e -> new ViewCustomersFrame(dm));
         addCustomerBtn.addActionListener(e -> new AddCustomerFrame(dm));
         searchCustomerBtn.addActionListener(e -> new SearchCustomerFrame(dm));
         customerRentHistoryBtn.addActionListener(e -> new CustomerRentHistoryFrame(dm));
