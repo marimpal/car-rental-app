@@ -26,10 +26,11 @@ public class RentCarFrame extends JFrame {
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
         // Panel με grid για τα πεδια και κουμπια
-        JPanel p = new JPanel(new GridLayout(5,2,4,4));
+        JPanel p = new JPanel(new GridLayout(6,2,4,4));
 
         // Πεδία εισαγωγής για ID αυτοκινήτου, ΑΦΜ πελάτη και ημερομηνίες
         JTextField carId = new JTextField();
+        JTextField user = new JTextField();
         JTextField customerVat = new JTextField();
         JTextField start = new JTextField("YYYY-MM-DD");
         JTextField end = new JTextField("YYYY-MM-DD");
@@ -39,6 +40,7 @@ public class RentCarFrame extends JFrame {
 
         // Προσθήκη ετικετών και πεδίων στο panel
         p.add(new JLabel("Car ID:")); p.add(carId);
+        p.add(new JLabel("User:")); p.add(user);
         p.add(new JLabel("Customer VAT:")); p.add(customerVat);
         p.add(new JLabel("Start date:")); p.add(start);
         p.add(new JLabel("End date:")); p.add(end);

@@ -112,9 +112,9 @@ public class Rental {
     }
 
     public String toString() {
-        return "Αυτοκίνητο: " + carId +
+        return "Id Ενοικίασης: " + rentalId + " | Αυτοκίνητο: " + carId +
                 " | Πελάτης: " + customer +
-                " | Από: " + rentalId +
+                " | Από: " + rentalDate +
                 " | Έως: " + returnDate;
     }
 }

@@ -2,7 +2,6 @@
  * @author Παναγιώτα Πατεράκη  ΑΕΜ 4839
  * @since 2025-12-17
  */
-package main;
 
 import api.DataManager;
 import gui.LoginFrame;
