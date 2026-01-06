@@ -42,16 +42,18 @@ public class MainMenuFrame extends JFrame {
         JButton addCarBtn = new JButton("Add Car");
         JButton viewCarsBtn = new JButton("View Cars");
         JButton searchCarBtn = new JButton("Search Car");
-
+        JButton carRentHistoryBtn = new JButton("Car Rent History");
+        JButton customerRentHistoryBtn = new JButton("Customer Rent History");
         JButton addCustomerBtn = new JButton("Add Customer");
         JButton searchCustomerBtn = new JButton("Search Customer");
-
         JButton logoutBtn = new JButton("Logout");
 
         // Προσθήκη των κουμπιών στο panel
         panel.add(addCarBtn);
         panel.add(viewCarsBtn);
         panel.add(searchCarBtn);
+        panel.add(carRentHistoryBtn);
+        panel.add(customerRentHistoryBtn);
         panel.add(addCustomerBtn);
         panel.add(searchCustomerBtn);
         panel.add(logoutBtn);
@@ -68,6 +70,16 @@ public class MainMenuFrame extends JFrame {
 
         // Αναζήτηση αυτοκινήτου
         searchCarBtn.addActionListener(e -> new SearchCarFrame(dm));
+
+        //Εμφανιση ιστορικου του αυτοκινητου
+        carRentHistoryBtn.addActionListener(
+                e -> new CarRentHistoryFrame(dm)
+        );
+
+        //Εμφανιση του ιστορικου των πελατων
+        customerRentHistoryBtn.addActionListener(
+                e -> new CustomerRentHistoryFrame(dm)
+        );
 
         // Προσθήκη νέου πελάτη
         addCustomerBtn.addActionListener(e -> new AddCustomerFrame(dm));
