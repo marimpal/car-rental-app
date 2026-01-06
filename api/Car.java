@@ -116,13 +116,6 @@ public class Car {
     public String getStatus() {return status;}
 
     // Setters
-    /**
-     * Ορίζει την τρέχουσα κατάσταση του οχήματος.
-     * @param status Η νέα κατάσταση του οχήματος (String)
-     */
-    public void setStatus(String status) {
-        this.status = status;
-    }
 
     /**
      * Ορίζει το χρώμα του οχήματος.
@@ -159,6 +152,15 @@ public class Car {
     public void setModel (String model) {
         this.model = model;
     }
+    /**
+     * Ορίζει την τρέχουσα κατάσταση του οχήματος.
+     * @param status Η νέα κατάσταση του οχήματος (String)
+     */
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+
 
     /**
      * Μετατρέπει τα δεδομένα του χρήστη σε μορφή CSV όπως αποθηκεύονται στο αρχείο.
