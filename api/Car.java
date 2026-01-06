@@ -123,6 +123,43 @@ public class Car {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    /**
+     * Ορίζει το χρώμα του οχήματος.
+     * @param color Το νέο χρώμα του οχήματος (String)
+     */
+    public void setColor(String color) {
+        this.color = color;
+    }
+    /**
+     * Ορίζει την πινακίδα κυκλοφορίας του οχήματος.
+     * @param licensePlate Η νέα πινακίδα κυκλοφορίας του οχήματος (String)
+     */
+    public void setLicensePlate(String licensePlate) {
+        this.licensePlate = licensePlate;
+    }
+    /**
+     * Ορίζει τον τύπο του οχήματος.
+     * @param type Ο νέος τύπος του οχήματος (String)
+     */
+    public void setType (String type) {
+        this.type = type;
+    }
+    /**
+     * Ορίζει τη μάρκα του οχήματος.
+     * @param brand Η νέα μάρκα του οχήματος (String)
+     */
+    public void setBrand (String brand) {
+        this.brand = brand;
+    }
+    /**
+     * Ορίζει το μοντέλο του οχήματος.
+     * @param model Το νέο μοντέλο του οχήματος (String)
+     */
+    public void setModel (String model) {
+        this.model = model;
+    }
+
     /**
      * Μετατρέπει τα δεδομένα του χρήστη σε μορφή CSV όπως αποθηκεύονται στο αρχείο.
      * Η σειρά των πεδίων είναι: id, licensePlate, brand, type, model, year, color, status.
