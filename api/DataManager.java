@@ -265,20 +265,50 @@ public class DataManager {
         throw new Exception("Το αυτοκίνητο δεν βρέθηκε για ενημέρωση");
     }
 
+
+
     /**
-     * Αναζητά αυτοκίνητα που ταιριάζουν με τα κριτήρια αναζήτησης.
-     * Αναζητά σε ID, πινακίδα, μάρκα, μοντέλο, χρώμα και κατάσταση.
+     * Αναζητά αυτοκίνητα που ταιριάζουν με πολλαπλά κριτήρια
+     * σε όλα τα πεδία: id, licensePlate, brand, model, color, status και year.
      *
-     * @param criteria Τα κριτήρια αναζήτησης (μπορεί να είναι μέρος του ID, της πινακίδας, της μάρκας, του μοντέλου, του χρώματος ή της κατάστασης).
-     * @return Μια λίστα με τα αυτοκίνητα που ταιριάζουν με τα κριτήρια.
+     * * @param criteria Τα κριτήρια αναζήτησης (μπορεί να περιέχει πολλαπλές λέξεις)
+     * * @return Μια λίστα με τα αυτοκίνητα που ταιριάζουν με όλα τα κριτήρια.
+     *
+     *
      */
     public ArrayList<Car> searchCar(String criteria) {
-        criteria = criteria.toLowerCase();
         ArrayList<Car> results = new ArrayList<>();
+
+        // Το "\\s+" σημαίνει ένα ή περισσότερα κενά
+        String[] keywords = criteria.toLowerCase().trim().split("\\s+");
+
         for (Car car : cars) {
-            if (car.getId().toLowerCase().contains(criteria) || car.getLicensePlate().toLowerCase().contains(criteria) ||
-                    car.getBrand().toLowerCase().contains(criteria) || car.getModel().toLowerCase().contains(criteria) ||
-                    car.getColor().toLowerCase().contains(criteria) || car.getStatus().toLowerCase().contains(criteria)) {
+            boolean matchesAllKeywords = true;
+
+            // Ελέγχουμε κάθε λέξη-κλειδί ξεχωριστά
+            for (String keyword : keywords) {
+                // Μετατροπή του έτους σε String για να γίνει η σύγκριση (αν υπάρχει πεδίο year)
+                String yearStr = String.valueOf(car.getYear());
+
+                // Ελέγχουμε αν η συγκεκριμένη λέξη υπάρχει σε ΚΑΠΟΙΟ από τα πεδία
+                boolean keywordFoundInCar =
+                        car.getId().toLowerCase().contains(keyword) ||
+                                car.getLicensePlate().toLowerCase().contains(keyword) ||
+                                car.getBrand().toLowerCase().contains(keyword) ||
+                                car.getModel().toLowerCase().contains(keyword) ||
+                                car.getColor().toLowerCase().contains(keyword) ||
+                                car.getStatus().toLowerCase().contains(keyword) ||
+                                yearStr.contains(keyword); // Προσθήκη αναζήτησης έτους
+
+                // Αν έστω και μία λέξη δε βρεθεί πουθενά στο αυτοκίνητο, τότε το αμάξι απορρίπτεται
+                if (!keywordFoundInCar) {
+                    matchesAllKeywords = false;
+                    break; // Σταματάμε να ψάχνουμε τις υπόλοιπες λέξεις για αυτό το αμάξι
+                }
+            }
+
+            // 3. Αν βρέθηκαν ΟΛΕΣ οι λέξεις, προσθέτουμε το αμάξι στη λίστα
+            if (matchesAllKeywords) {
                 results.add(car);
             }
         }
