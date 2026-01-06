@@ -273,11 +273,12 @@ public class DataManager {
      * @return Μια λίστα με τα αυτοκίνητα που ταιριάζουν με τα κριτήρια.
      */
     public ArrayList<Car> searchCar(String criteria) {
+        criteria = criteria.toLowerCase();
         ArrayList<Car> results = new ArrayList<>();
         for (Car car : cars) {
-            if (car.getId().contains(criteria) || car.getLicensePlate().contains(criteria) ||
-                    car.getBrand().contains(criteria) || car.getModel().contains(criteria) ||
-                    car.getColor().contains(criteria) || car.getStatus().contains(criteria)) {
+            if (car.getId().toLowerCase().contains(criteria) || car.getLicensePlate().toLowerCase().contains(criteria) ||
+                    car.getBrand().toLowerCase().contains(criteria) || car.getModel().toLowerCase().contains(criteria) ||
+                    car.getColor().toLowerCase().contains(criteria) || car.getStatus().toLowerCase().contains(criteria)) {
                 results.add(car);
             }
         }
@@ -356,10 +357,11 @@ public class DataManager {
      * @return Μια λίστα με τους πελάτες που ταιριάζουν με τα κριτήρια.
      */
     public ArrayList<Customer> searchCustomer(String criteria) {
+        criteria = criteria.toLowerCase();
         ArrayList<Customer> results = new ArrayList<>();
         for (Customer c : customers) {
-            if (c.getVatNumber().contains(criteria) || c.getFullName().contains(criteria) ||
-                    c.getEmail().contains(criteria) || c.getPhoneNumber().contains(criteria)) {
+            if (c.getVatNumber().toLowerCase().contains(criteria) || c.getFullName().toLowerCase().contains(criteria) ||
+                    c.getEmail().toLowerCase().contains(criteria) || c.getPhoneNumber().toLowerCase().contains(criteria)) {
                 results.add(c);
             }
         }

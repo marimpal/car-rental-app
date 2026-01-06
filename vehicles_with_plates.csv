@@ -1,7 +1,7 @@
 id, plate, brand, type, model, year, color, status
 1,ΙΚΥ1234,Toyota,Corolla,Sedan,2019,Ασημί,Διαθέσιμο
 2,ΝΒΡ5678,Honda,Civic,Hatchback,2020,Μπλε,Διαθέσιμο
-3,ΡΤΛ9012,Ford,Focus,SUV,2021,Μαύρο,Διαθέσιμο
+3,ΡΤΛ9012,Ford,Focus,SUV,12312,Μαύρο,Διαθέσιμο
 4,ΧΖΑ3456,Volkswagen,Passat,Sedan,2018,Λευκό,Διαθέσιμο
 5,ΕΜΚ7890,Nissan,Qashqai,Crossover,2022,Κόκκινο,Διαθέσιμο
 6,ΑΘΕ4567,BMW,X3,SUV,2020,Γκρι,Διαθέσιμο
@@ -52,3 +52,4 @@ id, plate, brand, type, model, year, color, status
 de7aad27-c312-48b3-b247-efc87b32da36,htrhjj5,hy46yj,ytj6uj,hnyujm,23515,tyju6,Διαθέσιμο
 1837cd9c-b188-4c2d-bf5c-327a85978381,hfdx,hfxd,gsx,gxd,543,feds,Διαθέσιμο
 873b3b6c-5496-4631-98c8-b9b245e1e489,gs,sgf,sg,fs,356,da,Διαθέσιμο
+eea0848f-302b-4912-8488-20710652f11c,safas,seadz,ad,ad,3,as,Διαθέσιμο

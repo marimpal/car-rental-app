@@ -153,6 +153,13 @@ public class Car {
         this.model = model;
     }
     /**
+     * Ορίζει το έτος κατασκευής του οχήματος.
+     * @param year Το νέο έτος κατασκευής του οχήματος (int)
+     */
+    public void setYear (int year) {
+        this.year = year;
+    }
+    /**
      * Ορίζει την τρέχουσα κατάσταση του οχήματος.
      * @param status Η νέα κατάσταση του οχήματος (String)
      */
@@ -173,7 +180,7 @@ public class Car {
     }
 
     public String toString() {
-        return "Πινακίδα: " + licensePlate +
+        return "Car Id:" + id + "Πινακίδα: " + licensePlate +
                 " | Μάρκα: " + brand +
                 " | Μοντέλο: " + model +
                 " | Έτος: " + year +

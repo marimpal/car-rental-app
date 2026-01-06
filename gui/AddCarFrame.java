@@ -41,6 +41,7 @@ public class AddCarFrame extends JFrame {
         JTextField model = new JTextField();
         JTextField year = new JTextField();
         JTextField color = new JTextField();
+        JTextField status = new JTextField();
 
         // Κουμπί προσθήκης αυτοκινήτου
         JButton addBtn = new JButton("Add");
@@ -52,6 +53,7 @@ public class AddCarFrame extends JFrame {
         p.add(new JLabel("Model:")); p.add(model);
         p.add(new JLabel("Year:")); p.add(year);
         p.add(new JLabel("Color:")); p.add(color);
+        p.add(new JLabel("Status:")); p.add(status);
         p.add(new JLabel()); p.add(addBtn);
 
         // Προσθήκη του πάνελ στο παράθυρο
