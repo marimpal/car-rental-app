@@ -303,10 +303,9 @@ public class DataManager {
                 // Αν έστω και μία λέξη δε βρεθεί πουθενά στο αυτοκίνητο, τότε το αμάξι απορρίπτεται
                 if (!keywordFoundInCar) {
                     matchesAllKeywords = false;
-                    break; // Σταματάμε να ψάχνουμε τις υπόλοιπες λέξεις για αυτό το αμάξι
+                    break;
                 }
             }
-
             // Αν βρέθηκαν ΟΛΕΣ οι λέξεις, προσθέτουμε το αμάξι στη λίστα
             if (matchesAllKeywords) {
                 results.add(car);
