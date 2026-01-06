@@ -1,13 +1,16 @@
 /**
- * Παράθυρο προβολής όλων των αυτοκινήτων
- * Από εδώ ο χρήστης μπορεί να επιλέξει αυτοκίνητο
- * και να το επεξεργαστεί (Edit)
- *
+ * Προβολή όλων των αυτοκινήτων.
+ * Από εδώ γίνεται και η επιλογή για ΕΠΕΞΕΡΓΑΣΙΑ αυτοκινήτου.
  */
- package gui;
 
-import api.DataManager;
+/**
+ * @author Παναγιώτα Πατεράκη  ΑΕΜ 4839
+ * @since 2025-12-17
+ */
+package gui;
+
 import api.Car;
+import api.DataManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,63 +18,37 @@ import java.util.List;
 
 public class ViewCarsFrame extends JFrame {
 
-    // Αναφορά στο DataManager
-    private final DataManager dm;
-
-    // Λίστα εμφάνισης αυτοκινήτων
-    private final JList<Car> carList;
-
-    /**
-     * Constructor του ViewCarsFrame
-     */
     public ViewCarsFrame(DataManager dm) {
-        this.dm = dm;
 
-        // Ρυθμίσεις παραθύρου
         setTitle("View Cars");
-        setSize(400, 300);
+        setSize(600, 400);
         setLocationRelativeTo(null);
 
-        // Λήψη όλων των αυτοκινήτων από τον DataManager
+        DefaultListModel<Car> model = new DefaultListModel<>();
+        JList<Car> carList = new JList<>(model);
+
+        // Φόρτωση όλων των αυτοκινήτων
         List<Car> cars = dm.getAllCars();
+        for (Car c : cars) {
+            model.addElement(c);
+        }
 
-        // Δημιουργία της λίστας με τα αυτοκίνητα
-        carList = new JList<>(cars.toArray(new Car[0]));
-
-        // Scroll για τη λίστα
-        JScrollPane scrollPane = new JScrollPane(carList);
-
-        // Κουμπί επεξεργασίας του επιλεγμένου αυτοκινήτου
         JButton editBtn = new JButton("Edit Selected Car");
 
-        // Ενέργεια κουμπιού για Edit
         editBtn.addActionListener(e -> {
-
-            // Παίρνουμε το επιλεγμένο αυτοκίνητο
-            Car selectedCar = carList.getSelectedValue();
-
-            // Αν δεν έχει επιλεγεί τίποτα
-            if (selectedCar == null) {
-                JOptionPane.showMessageDialog(this,
-                        "Please select a car first");
-                return;
+            Car selected = carList.getSelectedValue();
+            if (selected != null) {
+                new EditCarFrame(dm, selected);
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Select a car first");
             }
-
-            // Άνοιγμα φόρμας επεξεργασίας
-            new EditCarFrame(dm, selectedCar);
-
-            // Κλείσιμο του View
-            dispose();
         });
 
-        // Προσθήκη στοιχείων στο παράθυρο
-        add(scrollPane, BorderLayout.CENTER);
+        setLayout(new BorderLayout());
+        add(new JScrollPane(carList), BorderLayout.CENTER);
         add(editBtn, BorderLayout.SOUTH);
 
-        // Εμφάνιση παραθύρου
         setVisible(true);
     }
 }
-
-
-

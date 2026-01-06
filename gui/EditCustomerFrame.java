@@ -1,7 +1,8 @@
 /**
  * @author Παναγιώτα Πατεράκη
  * @since 2025-12-17
- * Παράθυρο επεξεργασίας πελάτη
+ * Επεξεργασία στοιχείων πελάτη.
+ * Ο πελάτης περνιέται έτοιμος από το SearchCustomerFrame.
  */
 package gui;
 
@@ -13,10 +14,7 @@ import java.awt.*;
 
 public class EditCustomerFrame extends JFrame {
 
-    // Αναφορά στο DataManager
     private final DataManager dm;
-
-    // Ο πελάτης που επεξεργαζόμαστε
     private final Customer customer;
 
     public EditCustomerFrame(DataManager dm, Customer customer) {
@@ -24,43 +22,40 @@ public class EditCustomerFrame extends JFrame {
         this.customer = customer;
 
         setTitle("Edit Customer");
-        setSize(300, 250);
+        setSize(400, 300);
         setLocationRelativeTo(null);
 
-        JPanel panel = new JPanel(new GridLayout(0, 2, 10, 10));
+        JTextField vatField = new JTextField(customer.getVatNumber());
+        vatField.setEditable(false);
 
-        // Πεδία με αρχικά στοιχεία πελάτη
         JTextField nameField = new JTextField(customer.getFullName());
         JTextField phoneField = new JTextField(customer.getPhoneNumber());
+        JTextField emailField = new JTextField(customer.getEmail());
 
         JButton saveBtn = new JButton("Save");
 
-        panel.add(new JLabel("Name:"));
-        panel.add(nameField);
-        panel.add(new JLabel("Phone:"));
-        panel.add(phoneField);
-        panel.add(new JLabel());
-        panel.add(saveBtn);
-
-        // Αποθήκευση αλλαγών
         saveBtn.addActionListener(e -> {
-
             customer.setFullName(nameField.getText());
             customer.setPhoneNumber(phoneField.getText());
+            customer.setEmail(emailField.getText());
 
-            try {
-                dm.updateCustomer(customer);
-            } catch (Exception ex) {
-                throw new RuntimeException(ex);
-            }
-
-            JOptionPane.showMessageDialog(this,
-                    "Customer updated successfully");
-
+            dm.updateCustomer(customer);
+            JOptionPane.showMessageDialog(this, "Customer updated");
             dispose();
         });
 
-        add(panel);
+        setLayout(new GridLayout(0, 2, 8, 8));
+        add(new JLabel("VAT:"));
+        add(vatField);
+        add(new JLabel("Full Name:"));
+        add(nameField);
+        add(new JLabel("Phone:"));
+        add(phoneField);
+        add(new JLabel("Email:"));
+        add(emailField);
+        add(new JLabel());
+        add(saveBtn);
+
         setVisible(true);
     }
 }

@@ -1,7 +1,8 @@
 /**
  * @author Παναγιώτα Πατεράκη
  *  @since 2025-12-17
- * Παράθυρο αναζήτησης πελάτη
+ * Αναζήτηση πελάτη με βάση ΑΦΜ.
+ * Από εδώ ανοίγει το EditCustomerFrame.
  */
 package gui;
 
@@ -14,41 +15,51 @@ import java.util.List;
 
 public class SearchCustomerFrame extends JFrame {
 
-    // Αναφορά στο DataManager
-    private final DataManager dm;
-
+    /**
+     * Frame αναζήτησης πελατών με οποιοδήποτε κριτήριο
+     * (ΑΦΜ, όνομα ή τηλέφωνο).
+     */
     public SearchCustomerFrame(DataManager dm) {
-        this.dm = dm;
 
         // Ρυθμίσεις παραθύρου
         setTitle("Search Customer");
-        setSize(400, 300);
+        setSize(500, 400);
         setLocationRelativeTo(null);
 
-        // Panel για τα στοιχεία αναζήτησης
-        JPanel topPanel = new JPanel();
+        // Πεδίο όπου ο χρήστης γράφει το κριτήριο αναζήτησης
+        JTextField searchField = new JTextField();
 
-        JTextField searchField = new JTextField(15);
+        // Κουμπί αναζήτησης
         JButton searchBtn = new JButton("Search");
 
-        // Λίστα αποτελεσμάτων
-        JList<Customer> resultList = new JList<>();
-        JScrollPane scrollPane = new JScrollPane(resultList);
+        // Μοντέλο και λίστα για εμφάνιση αποτελεσμάτων
+        DefaultListModel<Customer> model = new DefaultListModel<>();
+        JList<Customer> customerList = new JList<>(model);
 
-        topPanel.add(new JLabel("Search:"));
-        topPanel.add(searchField);
-        topPanel.add(searchBtn);
-
-        // Ενέργεια κουμπιού Search
+        /**
+         * Όταν πατηθεί το κουμπί Search:
+         * - καθαρίζω τα παλιά αποτελέσματα
+         * - καλω τη searchCustomers του DataManager
+         * - εμφανίζω τους πελάτες που βρέθηκαν
+         */
         searchBtn.addActionListener(e -> {
-            String keyword = searchField.getText();
-            List<Customer> results = dm.searchCustomer(keyword);
-            resultList.setListData(results.toArray(new Customer[0]));
+            model.clear();
+
+            List<Customer> results =
+                    dm.searchCustomer(searchField.getText());
+
+            for (Customer c : results) {
+                model.addElement(c);
+            }
         });
 
-        add(topPanel, BorderLayout.NORTH);
-        add(scrollPane, BorderLayout.CENTER);
+        // Layout του παραθύρου
+        setLayout(new BorderLayout());
+        add(searchField, BorderLayout.NORTH);
+        add(new JScrollPane(customerList), BorderLayout.CENTER);
+        add(searchBtn, BorderLayout.SOUTH);
 
+        // Εμφάνιση παραθύρου
         setVisible(true);
     }
 }

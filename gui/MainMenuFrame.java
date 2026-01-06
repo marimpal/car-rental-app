@@ -1,101 +1,94 @@
 /**
- * Κεντρικό μενού της εφαρμογής
- * Από εδώ ο χρήστης έχει πρόσβαση σε όλες τις βασικές λειτουργίες
+ * Κεντρικό μενού της εφαρμογής.
+ * Από εδώ ο χρήστης έχει πρόσβαση σε όλες τις βασικές λειτουργίες.
  *
  * @author Παναγιώτα Πατεράκη
  * @since 2025-12-17
  */
+
 package gui;
 
 import api.DataManager;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class MainMenuFrame extends JFrame {
 
-    // Αντικείμενο DataManager για επικοινωνία με τα δεδομένα της εφαρμογής
+    // Αντικείμενο DataManager για επικοινωνία GUI με API
     private final DataManager dm;
 
-    /**
-     * Constructor του Main Menu
-     * Δημιουργεί το βασικό παράθυρο με όλα τα κουμπιά
-     */
     public MainMenuFrame(DataManager dm) {
         this.dm = dm;
 
-        // Τίτλος παραθύρου
+        // Ρυθμίσεις παραθύρου
         setTitle("Main Menu");
-
-        // Διαστάσεις παραθύρου
-        setSize(400, 450);
-
-        // Κεντράρισμα στην οθόνη
+        setSize(400, 550);
         setLocationRelativeTo(null);
-
-        // Κλείσιμο εφαρμογής όταν κλείσει το παράθυρο
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         // Panel με κάθετη διάταξη κουμπιών
         JPanel panel = new JPanel(new GridLayout(0, 1, 10, 10));
 
-        // Δημιουργία κουμπιών για τις βασικές λειτουργίες
+        // Κουμπιά λειτουργιών αυτοκινήτων
         JButton addCarBtn = new JButton("Add Car");
         JButton viewCarsBtn = new JButton("View Cars");
         JButton searchCarBtn = new JButton("Search Car");
         JButton carRentHistoryBtn = new JButton("Car Rent History");
-        JButton customerRentHistoryBtn = new JButton("Customer Rent History");
+
+        // Κουμπιά λειτουργιών πελατών
         JButton addCustomerBtn = new JButton("Add Customer");
         JButton searchCustomerBtn = new JButton("Search Customer");
+        JButton customerRentHistoryBtn = new JButton("Customer Rent History");
+
+        // Κουμπιά ενοικίασης
+        JButton rentCarBtn = new JButton("Rent Car");
+        JButton returnCarBtn = new JButton("Return Car");
+
+        // Διαχείριση χρηστών
+        JButton userManagementBtn = new JButton("User Management");
         JButton logoutBtn = new JButton("Logout");
 
-        // Προσθήκη των κουμπιών στο panel
+        // Προσθήκη κουμπιών στο panel
         panel.add(addCarBtn);
         panel.add(viewCarsBtn);
         panel.add(searchCarBtn);
         panel.add(carRentHistoryBtn);
-        panel.add(customerRentHistoryBtn);
+
         panel.add(addCustomerBtn);
         panel.add(searchCustomerBtn);
+        panel.add(customerRentHistoryBtn);
+
+        panel.add(rentCarBtn);
+        panel.add(returnCarBtn);
+
+        panel.add(userManagementBtn);
         panel.add(logoutBtn);
 
-        // Προσθήκη panel στο παράθυρο
         add(panel);
 
-        // Άνοιγμα της νφόρμας προσθήκης αυτοκινήτου
+        // Συνδέσεις κουμπιών με τα αντίστοιχα Frames
         addCarBtn.addActionListener(e -> new AddCarFrame(dm));
-
-        // Προβολή όλων των αυτοκινήτων
-        // Από αυτό το παράθυρο γίνεται και η επεξεργασία (Edit)
         viewCarsBtn.addActionListener(e -> new ViewCarsFrame(dm));
-
-        // Αναζήτηση αυτοκινήτου
         searchCarBtn.addActionListener(e -> new SearchCarFrame(dm));
+        carRentHistoryBtn.addActionListener(e -> new CarRentHistoryFrame(dm));
 
-        //Εμφανιση ιστορικου του αυτοκινητου
-        carRentHistoryBtn.addActionListener(
-                e -> new CarRentHistoryFrame(dm)
-        );
-
-        //Εμφανιση του ιστορικου των πελατων
-        customerRentHistoryBtn.addActionListener(
-                e -> new CustomerRentHistoryFrame(dm)
-        );
-
-        // Προσθήκη νέου πελάτη
         addCustomerBtn.addActionListener(e -> new AddCustomerFrame(dm));
-
-        // Αναζήτηση πελάτη
         searchCustomerBtn.addActionListener(e -> new SearchCustomerFrame(dm));
+        customerRentHistoryBtn.addActionListener(e -> new CustomerRentHistoryFrame(dm));
 
-        // Αποσύνδεση του χρήστη και επιστροφή στο Login
+        rentCarBtn.addActionListener(e -> new RentCarFrame(dm));
+        returnCarBtn.addActionListener(e -> new ReturnCarFrame(dm));
+
+        userManagementBtn.addActionListener(e -> new UserManagementFrame(dm));
+
+        // Logout
         logoutBtn.addActionListener(e -> {
             dm.logout();
             dispose();
             new LoginFrame(dm);
         });
 
-        // Εμφάνιση παραθύρου
         setVisible(true);
     }
 }
-
